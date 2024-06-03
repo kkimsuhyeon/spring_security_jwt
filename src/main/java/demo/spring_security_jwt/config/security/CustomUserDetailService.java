@@ -1,5 +1,6 @@
 package demo.spring_security_jwt.config.security;
 
+import demo.spring_security_jwt.domain.Member;
 import demo.spring_security_jwt.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return memberRepository.findById(username).orElseThrow(() -> new NoSuchElementException("메세지"));
+        Member member = memberRepository.findById(username).orElseThrow(() -> new NoSuchElementException("메세지"));
+        return new UserDetailDto(member);
     }
 }

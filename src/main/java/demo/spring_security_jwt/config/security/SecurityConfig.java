@@ -40,7 +40,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .exceptionHandling(authenticationManager -> authenticationManager
-                        .authenticationEntryPoint()
+//                        .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
                         .accessDeniedHandler(new JwtAccessDeniedHandler())
                 )
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
